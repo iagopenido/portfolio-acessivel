@@ -1,0 +1,183 @@
+:root{
+  --bg:#0b1020;           /* fundo */
+  --bg-soft:#111936;      /* blocos */
+  --fg:#e8ecf8;           /* texto */
+  --muted:#a9b4d0;
+  --accent:#7aa2ff;       /* links/botões */
+  --accent-2:#59f3c2;     /* detalhe */
+  --radius:.9rem;
+  --shadow:0 6px 22px rgba(0,0,0,.25);
+  --maxw: 1080px;
+  --fs: 18px;
+  --line:1.7;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7fb;
+    --bg-soft:#ffffff;
+    --fg:#0c1222;
+    --muted:#4a5470;
+    --accent:#155eef;
+    --accent-2:#00c39a;
+    --shadow:0 10px 30px rgba(12,18,34,.08);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font: 400 var(--fs)/var(--line) system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+  background:linear-gradient(180deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 85%, black) 100%);
+  color:var(--fg);
+}
+
+/* Acessibilidade base */
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;background:#000;color:#fff;padding:.6rem .9rem;border-radius:.4rem;z-index:1000}
+
+/* High contrast toggle reaproveita as mesmas cores */
+.high-contrast{--bg:#000;--bg-soft:#000;--fg:#fff;--muted:#d2d2d2;--accent:#0ff;--accent-2:#ff0;}
+
+/* Cabeçalho */
+header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: saturate(140%) blur(10px);
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
+  border-bottom:1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:.9rem 1rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap}
+.brand{display:flex; align-items:center; gap:.7rem}
+.brand .dot{width:.9rem;height:.9rem;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.brand h1{font-size:1.15rem;margin:0}
+
+/* Navegação */
+nav{margin-left:auto; display:flex; gap:.8rem; flex-wrap:wrap}
+nav a{
+  text-decoration:none; color:var(--fg);
+  padding:.45rem .75rem; border-radius:.55rem;
+  border:1px solid transparent;
+}
+nav a:hover, nav a[aria-current="page"]{
+  background: color-mix(in oklab, var(--accent) 20%, transparent);
+  border-color: color-mix(in oklab, var(--accent) 35%, transparent);
+}
+a{color:var(--accent)}
+
+/* Hero */
+.hero{
+  max-width:var(--maxw); margin:2rem auto 1.25rem; padding:1.5rem 1rem;
+  display:grid; gap:1rem;
+}
+.hero .card{
+  background:radial-gradient(1200px 600px at 100% -20%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 50%), var(--bg-soft);
+  border:1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+  box-shadow:var(--shadow);
+}
+.hero h2{margin:.2rem 0 0;font-size:clamp(1.3rem, 3vw, 1.9rem)}
+.hero p{color:var(--muted); margin:.3rem 0 0}
+
+/* Layout principal */
+main{max-width:var(--maxw); margin:0 auto; padding:0 1rem 2rem; display:grid; gap:1rem}
+.section-title{display:flex; align-items:center; gap:.5rem; margin:.2rem 0 1rem}
+.section-title .bar{width:.6rem;height:1.2rem;border-radius:.3rem;background:linear-gradient(180deg,var(--accent),var(--accent-2))}
+
+/* Cartão */
+.card{
+  background:var(--bg-soft);
+  border:1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+  border-radius:var(--radius);
+  padding:1.1rem 1.1rem;
+  box-shadow:var(--shadow);
+}
+.card h2{margin:.1rem 0 .6rem}
+
+/* Grade de projetos */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap:1rem;
+}
+.proj{
+  transition:transform .2s ease, box-shadow .2s ease;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce){
+  .proj{transition:none}
+}
+.proj:hover{transform:translateY(-4px); box-shadow:0 14px 32px rgba(0,0,0,.18)}
+.proj a{display:inline-block;margin-left:.3rem}
+
+/* Formulário e botões */
+label{display:block; margin:.4rem 0 .2rem}
+input, textarea{
+  width:100%; padding:.7rem .8rem; border-radius:.6rem;
+  border:1px solid color-mix(in oklab, var(--fg) 18%, transparent);
+  background: color-mix(in oklab, var(--bg) 92%, white 8%);
+  color:var(--fg);
+}
+button{
+  font:inherit; cursor:pointer; border-radius:.7rem; padding:.6rem .9rem;
+  border:1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 36%, transparent), color-mix(in oklab, var(--accent) 10%, transparent));
+  color:var(--fg);
+  box-shadow:0 6px 20px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+button:hover{filter:brightness(1.05)}
+button:focus{outline:3px solid var(--accent-2); outline-offset:2px}
+.controls button{margin-right:.25rem}
+
+/* Vídeo */
+video{width:100%; border-radius:.7rem; border:1px solid color-mix(in oklab, var(--fg) 12%, transparent)}
+summary{cursor:pointer}
+
+/* Rodapé */
+footer{border-top:1px solid color-mix(in oklab, var(--fg) 12%, transparent); background: color-mix(in oklab, var(--bg) 85%, transparent)}
+footer .wrap{justify-content:center}
+
+/* Utilidades */
+.muted{color:var(--muted)}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap; /* quebra pra linha de baixo no celular */
+}
+
+.controls button {
+  min-height: 44px; /* tamanho ideal pro toque no celular */
+  padding: 0.6rem 0.9rem;
+}
+
+input[type="range"] {
+  touch-action: pan-y; /* permite deslizar o slider em telas touch */
+  width: 140px;
+}
+
+.section-title { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.section-title button { min-height: 40px; }
+.visually-hidden{
+  position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; border:0;
+  clip:rect(0 0 0 0); clip-path:inset(50%); overflow:hidden; white-space:nowrap;
+}
+.quiet-header{
+  background: color-mix(in oklab, var(--bg) 95%, transparent);
+  border-bottom:1px solid color-mix(in oklab, var(--fg) 15%, transparent);
+  position:sticky; top:0; z-index:20;
+}
+.quiet-wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.4rem 1rem; gap:1rem; flex-wrap:wrap;
+}
+.brand-min{ display:flex; align-items:center; gap:.4rem; text-decoration:none; color:inherit; }
+.dot-min{ width:.5rem; height:.5rem; border-radius:50%; background: var(--accent,#155eef); }
+.site-name{ font-weight:600; font-size:.95rem; }
+.quiet-nav{ display:flex; gap:.5rem; }
+.quiet-nav a{ text-decoration:none; color:inherit; padding:.2rem .4rem; border-radius:.3rem; }
+.quiet-nav a:hover{ background:color-mix(in oklab, var(--accent) 10%, transparent); }
+.icon-btn{
+  width:34px; height:34px; border:1px solid color-mix(in oklab, var(--fg) 20%, transparent);
+  border-radius:8px; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.icon-btn:hover{ background:color-mix(in oklab, var(--fg) 5%, transparent); }
+.icon-btn[aria-pressed="true"]{ background:color-mix(in oklab, var(--accent) 15%, transparent); }
+
